@@ -1,0 +1,14 @@
+.logo {
+  color: white;
+  font-weight: bold;
+}
+
+.content {
+  min-height: calc(100vh - 64px - 68px);
+  background: #fff;
+  padding: 24px 50px;
+}
+
+.footer {
+  text-align: center;
+}

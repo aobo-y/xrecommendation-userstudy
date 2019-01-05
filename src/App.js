@@ -1,26 +1,27 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Layout } from 'antd';
+
+import styles from './App.module.css';
+
+const { Header, Content, Footer } = Layout;
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
+      <Layout className="layout">
+        <Header>
+          <span className={styles.logo}>Explanation Recommendation System</span>
+        </Header>
+        <Content className={styles.content}>
+
+        </Content>
+        <Footer className={styles.footer}>
+          <a href="http://www.cs.virginia.edu/~hw5x/HCDM/">
+            Human-Centric Data Mining Group
           </a>
-        </header>
-      </div>
+          &nbsp;@ UVa
+        </Footer>
+      </Layout>
     );
   }
 }
