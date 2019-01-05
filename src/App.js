@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import { Layout } from 'antd';
+import { Layout, Row, Col } from 'antd';
+
+import Main from './Main';
 
 import styles from './App.module.css';
 
@@ -13,7 +15,7 @@ class App extends Component {
           <span className={styles.logo}>Explanation Recommendation System</span>
         </Header>
         <Content className={styles.content}>
-
+          <Main />
         </Content>
         <Footer className={styles.footer}>
           <a href="http://www.cs.virginia.edu/~hw5x/HCDM/">
