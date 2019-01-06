@@ -48,12 +48,12 @@ class QuestionCard extends PureComponent {
         <p>Q{id}. How much do you like {feature}?</p>
         {
           submitted ? (
-            <p>Answer: {value < 0 ? 'Don\'t know' : value}</p>
+            <p>Answer: <strong>{value < 0 ? 'Don\'t know' : value}</strong></p>
           ) : (
             <>
               <InputSlider value={value} onChange={this.onChange} />
               <Button type="primary" onClick={this.onConfirm}>Confirm</Button>
-              <Button style={{marginLeft: 10}} onClick={this.onUnknown}>Don't Know</Button>
+              <Button style={{marginLeft: 10}} onClick={this.onUnknown}>I don't Know</Button>
             </>
           )
 
