@@ -6,10 +6,14 @@ import QuestionCard from './QuestionCard';
 import ItemCard from './ItemCard';
 
 import userTree from '../lib/user';
+import itemTree from '../lib/item';
+
+const ITEM_NUM = 4;
 
 class Main extends PureComponent {
   state = {
-    userNodes: [userTree.root]
+    userNodes: [userTree.root],
+    itemNodes: itemTree.getTopKItems(userTree.root.vector, ITEM_NUM)
   }
 
   onSubmit = (nodeId, value) => {
@@ -18,12 +22,13 @@ class Main extends PureComponent {
 
     userNodes[userNodes.length - 1].submitted = true;
     this.setState({
-      userNodes: [...userNodes, newNode]
+      userNodes: [...userNodes, newNode],
+      itemNodes: itemTree.getTopKItems(newNode.vector, ITEM_NUM)
     });
   }
 
   render() {
-    const { userNodes } = this.state;
+    const { userNodes, itemNodes } = this.state;
 
     return (
       <>
@@ -37,8 +42,11 @@ class Main extends PureComponent {
         </Card>
 
         <Card title="Recommendations" style={{marginTop: 24}}>
-          <ItemCard id={1} name="Phone A" />
-          <ItemCard id={1} name="Phone B" />
+          {
+            itemNodes.map((item, idx) =>
+              <ItemCard key={idx} id={item.id} name={item.name} />
+            )
+          }
         </Card>
       </>
     );
