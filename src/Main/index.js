@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 
-import { Card } from 'antd';
+import { Card, notification, Button } from 'antd';
 
 import QuestionCard from './QuestionCard';
 import ItemCard from './ItemCard';
@@ -25,6 +25,23 @@ class Main extends PureComponent {
       userNodes: [...userNodes, newNode],
       itemNodes: itemTree.getTopKItems(newNode.vector, ITEM_NUM)
     });
+
+    if (newNode.isLeaf) {
+      setTimeout(this.showNotification, 2000);
+    }
+  }
+
+  showNotification = () => {
+    notification.success({
+      duration: 0,
+      message: 'Successfully Complete',
+      description: 'Congratulation! You have answered all questions. Now you can review our final recommendations customized for you. Please follow the button below to tell us how you feel about this experience.',
+      btn: (
+        <Button type="primary" href="http://www.cs.virginia.edu/~hw5x/HCDM/" target="_blank">
+          Survey
+        </Button>
+      )
+    })
   }
 
   render() {
