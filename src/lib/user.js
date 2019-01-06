@@ -1,17 +1,4 @@
-import rawNodes from '../data/yelp_user_node.json';
-
-const nodes = rawNodes.map(node => {
-  return {
-    id: node.NodeId,
-    feature: node.Feature_Name.trim(),
-    isLeaf: node.Isleafnode === 'true',
-    splitValue: node.Feature_SplitValue,
-    gtId: node.Childnode_Greater_Id,
-    nGtId: node.Childnode_NoGreater_Id,
-    unknownId: node.Childnode_Unknown_Id,
-    vector: node.User_vector.split(' ')
-  };
-})
+import nodes from '../data/user_nodes.json';
 
 // NodeId starts from 1
 const getNodeById = id => nodes[id - 1]
