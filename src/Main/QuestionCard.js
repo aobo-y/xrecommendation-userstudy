@@ -10,7 +10,12 @@ class QuestionCard extends PureComponent {
   static propTypes = {
     id: PropTypes.number.isRequired,
     feature: PropTypes.string.isRequired,
+    submitted: PropTypes.bool,
     onSubmit: PropTypes.func
+  }
+
+  static defaultProps = {
+    submitted: false
   }
 
   state = {
@@ -25,23 +30,19 @@ class QuestionCard extends PureComponent {
   }
 
   onConfirm = () => {
-    this.setState({
-      submitted: true,
-    });
     this.props.onSubmit(this.state.value);
   }
 
   onUnknown = () => {
     this.setState({
-      submitted: true,
       value: -1
     });
     this.props.onSubmit(-1);
   }
 
   render() {
-    const {id, feature, onSubmit} = this.props;
-    const { value, submitted } = this.state;
+    const {id, feature, submitted } = this.props;
+    const { value } = this.state;
 
     return (
       <Box>
