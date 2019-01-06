@@ -11,8 +11,8 @@ class Main extends PureComponent {
     return (
       <>
         <Card title="Questions">
-          <QuestionCard id={1} feature="Battery" />
-          <QuestionCard id={2} feature="Price" />
+          <QuestionCard id={1} feature="Battery" onSubmit={() => {}} />
+          <QuestionCard id={2} feature="Price" onSubmit={() => {}} />
         </Card>
 
         <Card title="Recommendations" style={{marginTop: 24}}>

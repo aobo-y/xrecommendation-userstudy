@@ -1,0 +1,26 @@
+.wrapper {
+  position: relative;
+  padding: 0px 20px;
+}
+
+.wrapper :global(.anticon) {
+  position: absolute;
+  top: -2px;
+  width: 16px;
+  height: 16px;
+  line-height: 1;
+  font-size: 16px;
+  color: rgba(0, 0, 0, .25);
+}
+
+.wrapper :global(.anticon:first-child) {
+  left: 0;
+}
+
+.wrapper :global(.anticon:last-child) {
+  right: 0;
+}
+
+.row {
+  margin-bottom: 15px;
+}
