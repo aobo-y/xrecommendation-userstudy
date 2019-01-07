@@ -63,7 +63,7 @@ class Main extends PureComponent {
         <Card title={(<><Icon type="heart" className={styles.icon} />Recommendations</>)} style={{marginTop: 24}}>
           {
             itemNodes.map((item, idx) =>
-              <ItemCard key={idx} id={item.id} name={item.name} />
+              <ItemCard key={idx} id={item.id} name={item.name} tags={item.tags} />
             )
           }
         </Card>
