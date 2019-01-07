@@ -3,7 +3,7 @@ import React, { PureComponent } from 'react';
 import { Card, notification, Button, Icon, Row, Col } from 'antd';
 
 import QuestionCard from './QuestionCard';
-import ItemCard from './ItemCard';
+import Items from './Items';
 
 import userTree from '../lib/user';
 import itemTree from '../lib/item';
@@ -64,11 +64,7 @@ class Main extends PureComponent {
 
         <Col xs={24} sm={24} md={24} lg={14} xl={16}>
           <Card title={(<><Icon type="heart" className={styles.icon} />Recommendations</>)}>
-            {
-              itemNodes.map((item, idx) =>
-                <ItemCard key={idx} id={item.id} name={item.name} tags={item.tags} />
-              )
-            }
+            <Items items={itemNodes} />
           </Card>
         </Col>
       </Row>
