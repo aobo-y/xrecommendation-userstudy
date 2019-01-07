@@ -7,8 +7,7 @@ import {
   Button,
   Icon,
   Row,
-  Col,
-  Alert
+  Col
 } from 'antd';
 
 import QuestionList from './QuestionList';
