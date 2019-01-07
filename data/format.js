@@ -23,28 +23,24 @@ function genUserNodes() {
   fs.writeFileSync(path.join(__dirname, '../src/data/user_nodes.json'), JSON.stringify(nodes));
 }
 
-function genItemNodes() {
+function genItems() {
   const nodes = require('./yelp_item_node').map(node => {
     return {
       id: node.NodeId,
       feature: node.Feature_Name.trim(),
       parentId: node.Parent_NodeId,
-      isLeaf: node.Isleafnode === 'true'
+      isLeaf: node.Isleafnode === 'true',
+      items: node.Items
     };
   });
 
-  console.log('Generate item nodes...');
-  fs.writeFileSync(path.join(__dirname, '../src/data/item_nodes.json'), JSON.stringify(nodes));
-}
-
-function genItemList() {
   console.log('Generate item list...');
 
-  const contents = fs.readFileSync(path.join(__dirname, './yelp.itemmap'), {
+  const listContents = fs.readFileSync(path.join(__dirname, './yelp.itemmap'), {
     encoding: 'utf-8'
   });
 
-  const list = contents
+  const list = listContents
     .split('\n')
     .filter(line => Boolean(line))
     .map(line => line.split('='))
@@ -61,17 +57,31 @@ function genItemList() {
       return prev;
     }, []);
 
-  fs.writeFileSync(path.join(__dirname, '../src/data/item_list.json'), JSON.stringify(list));
-}
+  // add init parrent nodes
+  nodes
+    .filter(node => node.isLeaf)
+    .forEach(node => {
+      node.items.forEach(item => {
+        list[item].parentId = node.id;
+      })
+    })
 
-function genItemVectors() {
+  nodes.forEach(node => {
+    delete node.items;
+  });
+
+  fs.writeFileSync(path.join(__dirname, '../src/data/item_list.json'), JSON.stringify(list));
+
+  console.log('Generate item nodes...');
+  fs.writeFileSync(path.join(__dirname, '../src/data/item_nodes.json'), JSON.stringify(nodes));
+
   console.log('Generate item vectors...');
 
-  const contents = fs.readFileSync(path.join(__dirname, './yelp.itemvectors'), {
+  const vecContents = fs.readFileSync(path.join(__dirname, './yelp.itemvectors'), {
     encoding: 'utf-8'
   });
 
-  const vectors = contents
+  const vectors = vecContents
     .split('\n')
     .map(line => line.split(' ').map(n => Number(n)))
 
@@ -84,22 +94,15 @@ switch (command.toLowerCase()) {
     genUserNodes();
     break;
 
-  case 'itemnodes':
-    genItemNodes();
-    break;
-
-  case 'itemlist':
-    genItemList();
+  case 'items':
+    genItems();
     break;
 
   case 'itemvectors':
-    genItemVectors();
     break;
 
   default:
     genUserNodes();
-    genItemNodes();
-    genItemList();
-    genItemVectors();
+    genItems();
     break;
 }

@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import { List, Tag, Icon } from 'antd';
+import { List, Tag, Icon, Tooltip } from 'antd';
 
 const IconText = ({ type, text }) => (
-  <span>
-    <Icon type={type} style={{ marginRight: 8 }} />
-    {text}
-  </span>
+  <Tooltip title="prompt text" placement="bottomLeft">
+    <span>
+      <Icon type={type} style={{ marginRight: 8 }} />
+      {text}
+    </span>
+  </Tooltip>
 );
 
 class ItemList extends Component {
