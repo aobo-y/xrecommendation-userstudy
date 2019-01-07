@@ -10,7 +10,7 @@ import itemTree from '../lib/item';
 
 import styles from './index.module.css';
 
-const ITEM_NUM = 6;
+const ITEM_NUM = 5;
 
 class Main extends PureComponent {
   state = {

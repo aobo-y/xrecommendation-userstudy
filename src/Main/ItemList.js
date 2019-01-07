@@ -27,11 +27,10 @@ class ItemList extends Component {
         renderItem={item => (
           <List.Item
             key={item.name}
-            actions={[<IconText type="star-o" text="Explanations" />]}
+            actions={[<IconText type="solution" text="Explanation" />]}
           >
             <List.Item.Meta
               title={item.name}
-              description="category"
             />
             {
               item.tags.map((tag, idx) => <Tag key={idx} color="blue">{tag}</Tag>)
