@@ -4,7 +4,11 @@ import PropTypes from 'prop-types';
 import { List, Tag, Icon, Tooltip } from 'antd';
 
 const IconText = ({ type, text, exp }) => (
-  <Tooltip title={exp.join(' ')} placement="bottomLeft">
+  <Tooltip
+    title={exp.join(' ')}
+    placement="bottomLeft"
+    trigger={['hover', 'click', 'focus']}
+  >
     <span>
       <Icon type={type} style={{ marginRight: 8 }} />
       {text}
