@@ -35,7 +35,11 @@ class ItemList extends Component {
               title={item.name}
             />
             {
-              item.tags.map((tag, idx) => <Tag key={idx} color="blue">{tag}</Tag>)
+              item.tags.map((tag, idx) =>
+                <Tag key={idx} color="blue" style={{marginBottom: 6}}>
+                  {tag}
+                </Tag>
+              )
             }
           </List.Item>
         )}
