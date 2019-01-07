@@ -8,6 +8,7 @@
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
     "react-scripts": "2.1.2",
+    "shortid": "^2.2.14",
     "tinyqueue": "^2.0.0"
   },
   "scripts": {
