@@ -6,7 +6,22 @@
 .content {
   min-height: calc(100vh - 64px - 68px);
   background: #fff;
+
   padding: 24px 50px;
+}
+
+@media only screen and (max-width: 575px) {
+  .content {
+    padding: 24px 18px;
+  }
+
+  :global(.ant-layout-header) {
+    padding: 0 18px;
+  }
+
+  .content :global(.ant-card-body) {
+    padding: 16px;
+  }
 }
 
 .footer {

@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 
-import { Card, notification, Button, Icon } from 'antd';
+import { Card, notification, Button, Icon, Row, Col } from 'antd';
 
 import QuestionCard from './QuestionCard';
 import ItemCard from './ItemCard';
@@ -10,7 +10,7 @@ import itemTree from '../lib/item';
 
 import styles from './index.module.css';
 
-const ITEM_NUM = 4;
+const ITEM_NUM = 6;
 
 class Main extends PureComponent {
   state = {
@@ -50,24 +50,28 @@ class Main extends PureComponent {
     const { userNodes, itemNodes } = this.state;
 
     return (
-      <>
-        <Card title={(<><Icon type="question" className={styles.icon} />Questions</>)}>
-          {
-            userNodes.filter(node => !node.isLeaf).map((node, idx) => node.submitted ?
-              <QuestionCard key={idx} id={node.id} feature={node.feature} submitted /> :
-              <QuestionCard key={idx} id={node.id} feature={node.feature} onSubmit={v => this.onSubmit(node.id, v)} />
-            )
-          }
-        </Card>
+      <Row gutter={24}>
+        <Col xs={24} sm={24} md={24} lg={10} xl={8}>
+          <Card title={(<><Icon type="question" className={styles.icon} />Questions</>)} style={{marginBottom: 16}}>
+            {
+              userNodes.filter(node => !node.isLeaf).map((node, idx) => node.submitted ?
+                <QuestionCard key={idx} id={node.id} feature={node.feature} submitted /> :
+                <QuestionCard key={idx} id={node.id} feature={node.feature} onSubmit={v => this.onSubmit(node.id, v)} />
+              )
+            }
+          </Card>
+        </Col>
 
-        <Card title={(<><Icon type="heart" className={styles.icon} />Recommendations</>)} style={{marginTop: 24}}>
-          {
-            itemNodes.map((item, idx) =>
-              <ItemCard key={idx} id={item.id} name={item.name} tags={item.tags} />
-            )
-          }
-        </Card>
-      </>
+        <Col xs={24} sm={24} md={24} lg={14} xl={16}>
+          <Card title={(<><Icon type="heart" className={styles.icon} />Recommendations</>)}>
+            {
+              itemNodes.map((item, idx) =>
+                <ItemCard key={idx} id={item.id} name={item.name} tags={item.tags} />
+              )
+            }
+          </Card>
+        </Col>
+      </Row>
     );
   }
 }

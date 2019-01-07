@@ -21,8 +21,8 @@ class InputSlider extends Component {
 
   render() {
     return (
-      <Row className={styles.row}>
-        <Col span={12}>
+      <Row className={styles.row} gutter={16}>
+        <Col span={14}>
           <div className={styles.wrapper}>
             <Icon type="frown-o" />
             <Slider
@@ -31,10 +31,9 @@ class InputSlider extends Component {
             <Icon type="smile-o" />
           </div>
         </Col>
-        <Col span={4}>
+        <Col span={10}>
           <InputNumber
             {...this.props}
-            style={{ marginLeft: 16 }}
           />
         </Col>
       </Row>
