@@ -1,6 +1,15 @@
 import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 
-import { Card, notification, Button, Icon, Row, Col } from 'antd';
+import {
+  Card,
+  notification,
+  Button,
+  Icon,
+  Row,
+  Col,
+  Alert
+} from 'antd';
 
 import QuestionList from './QuestionList';
 import ItemList from './ItemList';
@@ -13,6 +22,10 @@ import styles from './index.module.css';
 const ITEM_NUM = 5;
 
 class Main extends PureComponent {
+  static propTypes = {
+    onEnd: PropTypes.func.isRequired
+  }
+
   state = {
     userNodes: [userTree.root],
     itemNodes: itemTree.getTopKItems(userTree.root.vector, ITEM_NUM)
@@ -36,13 +49,14 @@ class Main extends PureComponent {
   showNotification = () => {
     notification.success({
       duration: 0,
-      message: 'Successfully Complete',
-      description: 'Congratulation! You have answered all questions. Now you can review our final recommendations customized for you. Please follow the button below to tell us how you feel about this experience.',
+      message: 'Congratulation!',
+      description: 'You have answered all questions. Now you can review our final recommendations customized for you. Please follow the button below to tell us how you feel about this experience.',
       btn: (
         <Button type="primary" href="http://www.cs.virginia.edu/~hw5x/HCDM/" target="_blank">
           Survey
         </Button>
-      )
+      ),
+      onClose: this.props.onEnd
     })
   }
 
