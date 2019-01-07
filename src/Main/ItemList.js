@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 
 import { List, Tag, Icon, Tooltip } from 'antd';
 
-const IconText = ({ type, text }) => (
-  <Tooltip title="prompt text" placement="bottomLeft">
+const IconText = ({ type, text, exp }) => (
+  <Tooltip title={exp.join(' ')} placement="bottomLeft">
     <span>
       <Icon type={type} style={{ marginRight: 8 }} />
       {text}
@@ -29,7 +29,7 @@ class ItemList extends Component {
         renderItem={item => (
           <List.Item
             key={item.name}
-            actions={[<IconText type="solution" text="Explanation" />]}
+            actions={[<IconText type="solution" text="Explanation" exp={item.exp} />]}
           >
             <List.Item.Meta
               title={item.name}

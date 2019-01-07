@@ -3,8 +3,11 @@ import TinyQueue from 'tinyqueue';
 
 import itemVectorsData from '../data/item_vector';
 import itemList from '../data/item_list';
+import itemNodes from '../data/item_nodes';
 
 const itemVectors = math.matrix(itemVectorsData);
+
+const getNode = id => itemNodes[id - 1];
 
 export const getTopKItems = (vector, k) => {
   const result = math.multiply(itemVectors, vector).toArray();
@@ -25,9 +28,19 @@ export const getTopKItems = (vector, k) => {
     const { idx } = queue.pop();
     const item = itemList[idx];
 
+    const exp = [];
+    let node = getNode(item.parentId);
+    while(node) {
+      if (node.feature) {
+        exp.push(node.feature);
+      }
+      node = node.parentId < 0 ? null : getNode(node.parentId);
+    }
+
     items.push({
       id: idx,
-      ...item
+      ...item,
+      exp
     });
   }
 
