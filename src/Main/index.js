@@ -64,13 +64,13 @@ class Main extends PureComponent {
 
     return (
       <Row gutter={24}>
-        <Col xs={24} sm={24} md={24} lg={10} xl={8}>
+        <Col xs={24} sm={24} md={24} lg={9} xl={7}>
           <Card title={(<><Icon type="question" className={styles.icon} />Questions</>)} style={{marginBottom: 16}}>
             <QuestionList questions={userNodes} onSubmit={this.onSubmit} />
           </Card>
         </Col>
 
-        <Col xs={24} sm={24} md={24} lg={14} xl={16}>
+        <Col xs={24} sm={24} md={24} lg={15} xl={17}>
           <Card title={(<><Icon type="heart" className={styles.icon} />Recommendations</>)}>
             <ItemList items={itemNodes} />
           </Card>
