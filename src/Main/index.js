@@ -27,7 +27,7 @@ class Main extends PureComponent {
     });
 
     if (newNode.isLeaf) {
-      setTimeout(this.showNotification, 2000);
+      this.showNotification();
     }
   }
 
