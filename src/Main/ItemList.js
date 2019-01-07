@@ -10,7 +10,7 @@ const IconText = ({ type, text }) => (
   </span>
 );
 
-class Items extends Component {
+class ItemList extends Component {
   static propTypes = {
     items: PropTypes.arrayOf(PropTypes.object)
   }
@@ -43,4 +43,4 @@ class Items extends Component {
   }
 }
 
-export default Items;
+export default ItemList;
