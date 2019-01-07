@@ -2,11 +2,10 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { Button } from 'antd';
 
-import Box from './Box';
 import InputSlider from './InputSlider';
 
 
-class QuestionCard extends PureComponent {
+class QuestionItem extends PureComponent {
   static propTypes = {
     id: PropTypes.number.isRequired,
     feature: PropTypes.string.isRequired,
@@ -45,7 +44,7 @@ class QuestionCard extends PureComponent {
     const { value } = this.state;
 
     return (
-      <Box>
+      <>
         <p>Q{id}. How much do you like <strong>{feature}</strong>?</p>
         {
           submitted ? (
@@ -59,9 +58,9 @@ class QuestionCard extends PureComponent {
           )
 
         }
-      </Box>
+      </>
     );
   }
 }
 
-export default QuestionCard;
+export default QuestionItem;

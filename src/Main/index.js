@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 
 import { Card, notification, Button, Icon, Row, Col } from 'antd';
 
-import QuestionCard from './QuestionCard';
+import QuestionList from './QuestionList';
 import Items from './Items';
 
 import userTree from '../lib/user';
@@ -24,7 +24,7 @@ class Main extends PureComponent {
 
     userNodes[userNodes.length - 1].submitted = true;
     this.setState({
-      userNodes: [...userNodes, newNode],
+      userNodes: newNode.isLeaf ? [...userNodes] : [...userNodes, newNode],
       itemNodes: itemTree.getTopKItems(newNode.vector, ITEM_NUM)
     });
 
@@ -53,12 +53,7 @@ class Main extends PureComponent {
       <Row gutter={24}>
         <Col xs={24} sm={24} md={24} lg={10} xl={8}>
           <Card title={(<><Icon type="question" className={styles.icon} />Questions</>)} style={{marginBottom: 16}}>
-            {
-              userNodes.filter(node => !node.isLeaf).map((node, idx) => node.submitted ?
-                <QuestionCard key={idx} id={node.id} feature={node.feature} submitted /> :
-                <QuestionCard key={idx} id={node.id} feature={node.feature} onSubmit={v => this.onSubmit(node.id, v)} />
-              )
-            }
+            <QuestionList questions={userNodes} onSubmit={this.onSubmit} />
           </Card>
         </Col>
 
