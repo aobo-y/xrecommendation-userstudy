@@ -23,10 +23,11 @@ export const getTopKItems = (vector, k) => {
   const items = [];
   while (items.length < k) {
     const { idx } = queue.pop();
+    const item = itemList[idx];
 
     items.push({
-      id: idx + 1,
-      name: itemList[idx] || 'Anonymous'
+      id: idx,
+      ...item
     });
   }
 

@@ -40,16 +40,24 @@ function genItemNodes() {
 function genItemList() {
   console.log('Generate item list...');
 
-  const contents = fs.readFileSync(path.join(__dirname, './yelp.featuremap'), {
+  const contents = fs.readFileSync(path.join(__dirname, './yelp.itemmap'), {
     encoding: 'utf-8'
   });
 
   const list = contents
     .split('\n')
+    .filter(line => Boolean(line))
     .map(line => line.split('='))
     .reduce((prev, line) => {
       const idx = Number(line[0]);
-      prev[idx] = line[1]
+      const tagIndex = line[2].indexOf('[');
+      const name = line[2].substring(0, tagIndex - 1);
+      const tagStr = line[2].substring(tagIndex).replace(/\'/g, '"');
+      const tags = JSON.parse(tagStr);
+      prev[idx] = {
+        name,
+        tags
+      }
       return prev;
     }, []);
 
