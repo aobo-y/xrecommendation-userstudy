@@ -46,7 +46,7 @@ class QuestionCard extends PureComponent {
 
     return (
       <Box>
-        <p>Q{id}. How much do you like {feature}?</p>
+        <p>Q{id}. How much do you like <strong>{feature}</strong>?</p>
         {
           submitted ? (
             <p>Answer: <strong>{value < 0 ? 'Don\'t know' : value}</strong></p>
