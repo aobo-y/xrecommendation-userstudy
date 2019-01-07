@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Layout } from 'antd';
+import { Layout, Icon } from 'antd';
 import shortid from 'shortid';
 
 import Main from './Main';
@@ -15,7 +15,7 @@ class App extends Component {
     return (
       <Layout className="layout">
         <Header>
-          <div className={styles.profile}>{id}</div>
+          <div className={styles.profile}><Icon type="user" /> {id}</div>
           <span className={styles.logo}>Explanation Recommendation System</span>
         </Header>
         <Content className={styles.content}>
