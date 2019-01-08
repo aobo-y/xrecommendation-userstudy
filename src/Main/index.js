@@ -27,7 +27,7 @@ class Main extends PureComponent {
 
   state = {
     userNodes: [userTree.root],
-    itemNodes: itemTree.getTopKItems(userTree.root.vector, ITEM_NUM)
+    itemNodes: []
   }
 
   onSubmit = (nodeId, value) => {
