@@ -5,7 +5,7 @@ import { List, Tag, Icon, Tooltip } from 'antd';
 
 const IconText = ({ type, text, exp }) => (
   <Tooltip
-    title={exp.join(' ')}
+    title={`From your history, we think you will like the features ${exp.join(', ')} of this restaurant.`}
     placement="bottomLeft"
     trigger={['hover', 'click', 'focus']}
   >
