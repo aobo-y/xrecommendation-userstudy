@@ -19,12 +19,12 @@ class QuestionList extends Component {
         itemLayout="vertical"
         size="large"
         dataSource={questions}
-        renderItem={question => (
+        renderItem={(question, idx) => (
           <List.Item key={question.id}>
             {
               question.submitted ?
-                <QuestionItem id={question.id} feature={question.feature} submitted /> :
-                <QuestionItem id={question.id} feature={question.feature} onSubmit={v => onSubmit(question.id, v)} />
+                <QuestionItem id={idx + 1} feature={question.feature} submitted /> :
+                <QuestionItem id={idx + 1} feature={question.feature} onSubmit={v => onSubmit(question.id, v)} />
             }
           </List.Item>
         )}
