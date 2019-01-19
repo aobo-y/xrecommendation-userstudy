@@ -5,7 +5,7 @@ import { List, Tag, Icon, Tooltip, Empty, ConfigProvider } from 'antd';
 
 const IconText = ({ type, text, exp }) => (
   <Tooltip
-    title={`From your history, we think you will like the features ${exp.join(', ')} of this restaurant.`}
+    title={`From your history, we think you will like the features ${exp.join(', ')}`}
     placement="bottomLeft"
     trigger={['hover', 'click', 'focus']}
   >
@@ -35,11 +35,15 @@ class ItemList extends Component {
           footer={<div><b>{items.length}</b> items</div>}
           renderItem={item => (
             <List.Item
-              key={item.name}
+              key={item.id}
               actions={[<IconText type="solution" text="Explanation" exp={item.exp} />]}
             >
               <List.Item.Meta
-                title={item.name}
+                title={
+                  <a href={`https://www.amazon.com/gp/product/${item.id}`} target="_blank">
+                    {item.name}
+                  </a>
+                }
               />
               {
                 item.tags.map((tag, idx) =>

@@ -67,6 +67,8 @@ function genItems(set) {
           tags: []
         };
       }
+
+      prev[idx].id = line[1];
       return prev;
     }, []);
 
