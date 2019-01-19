@@ -74,7 +74,7 @@ function genItems(set) {
   nodes
     .filter(node => node.isLeaf)
     .forEach(node => {
-      if (!node.ietms) return;
+      if (!node.items) return;
 
       node.items.forEach(item => {
         list[item].parentId = node.id;

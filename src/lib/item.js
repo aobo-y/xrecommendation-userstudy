@@ -52,6 +52,7 @@ export const getTopKItems = (vector, k) => {
 
     const exp = [];
     let node = getNode(item.parentId);
+
     while(node) {
       if (node.feature) {
         exp.push(node.feature);
