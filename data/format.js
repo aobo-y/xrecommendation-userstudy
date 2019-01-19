@@ -5,26 +5,31 @@ const args = process.argv.slice(2);
 
 const command = args[0] || '';
 
-function genUserNodes() {
-  const nodes = require('./yelp_user_node').map(node => {
-    return {
-      id: node.NodeId,
-      feature: node.Feature_Name.trim(),
-      isLeaf: node.Isleafnode === 'true',
-      splitValue: node.Feature_SplitValue,
-      gtId: node.Childnode_Greater_Id,
-      nGtId: node.Childnode_NoGreater_Id,
-      unknownId: node.Childnode_Unknown_Id,
-      vector: node.User_vector.split(' ').map(n => Number(n))
-    };
-  });
+const models = ['fMf', 'MFCT'];
 
+function genUserNodes(set) {
   console.log('Generate user nodes...');
-  fs.writeFileSync(path.join(__dirname, '../src/data/user_nodes.json'), JSON.stringify(nodes));
+
+  models.forEach(model => {
+    const nodes = require(`./${set}/${model}/usernodes.json`).map(node => {
+      return {
+        id: node.NodeId,
+        feature: (model === 'fMf' ? node.Item_Name : node.Feature_Name).trim() ,
+        isLeaf: node.Isleafnode === 'true',
+        splitValue: node.Feature_SplitValue || null,
+        gtId: node.Childnode_Greater_Id,
+        nGtId: node.Childnode_NoGreater_Id,
+        unknownId: node.Childnode_Unknown_Id,
+        vector: node.User_vector.split(' ').map(n => Number(n))
+      };
+    });
+
+    fs.writeFileSync(path.join(__dirname, `../src/data/${set}/${model}/user_nodes.json`), JSON.stringify(nodes));
+  })
 }
 
-function genItems() {
-  const nodes = require('./yelp_item_node').map(node => {
+function genItems(set) {
+  const nodes = require(`./${set}/MFCT/itemnodes.json`).map(node => {
     return {
       id: node.NodeId,
       feature: node.Feature_Name.trim(),
@@ -36,7 +41,7 @@ function genItems() {
 
   console.log('Generate item list...');
 
-  const listContents = fs.readFileSync(path.join(__dirname, './yelp.itemmap'), {
+  const listContents = fs.readFileSync(path.join(__dirname, `./${set}/itemmap.txt`), {
     encoding: 'utf-8'
   });
 
@@ -46,13 +51,21 @@ function genItems() {
     .map(line => line.split('='))
     .reduce((prev, line) => {
       const idx = Number(line[0]);
-      const tagIndex = line[2].indexOf('[');
-      const name = line[2].substring(0, tagIndex - 1);
-      const tagStr = line[2].substring(tagIndex).replace(/\'/g, '"');
-      const tags = JSON.parse(tagStr);
-      prev[idx] = {
-        name,
-        tags
+
+      if (set === 'yelp') {
+        const tagIndex = line[2].indexOf('[');
+        const name = line[2].substring(0, tagIndex - 1);
+        const tagStr = line[2].substring(tagIndex).replace(/\'/g, '"');
+        const tags = JSON.parse(tagStr);
+        prev[idx] = {
+          name,
+          tags
+        };
+      } else {
+        prev[idx] = {
+          name: line[2],
+          tags: []
+        };
       }
       return prev;
     }, []);
@@ -61,6 +74,8 @@ function genItems() {
   nodes
     .filter(node => node.isLeaf)
     .forEach(node => {
+      if (!node.ietms) return;
+
       node.items.forEach(item => {
         list[item].parentId = node.id;
       })
@@ -70,39 +85,42 @@ function genItems() {
     delete node.items;
   });
 
-  fs.writeFileSync(path.join(__dirname, '../src/data/item_list.json'), JSON.stringify(list));
+  fs.writeFileSync(path.join(__dirname, `../src/data/${set}/item_list.json`), JSON.stringify(list));
 
   console.log('Generate item nodes...');
-  fs.writeFileSync(path.join(__dirname, '../src/data/item_nodes.json'), JSON.stringify(nodes));
+  fs.writeFileSync(path.join(__dirname, `../src/data/${set}/MFCT/item_nodes.json`), JSON.stringify(nodes));
 
   console.log('Generate item vectors...');
 
-  const vecContents = fs.readFileSync(path.join(__dirname, './yelp.itemvectors'), {
-    encoding: 'utf-8'
+  models.forEach(model => {
+    const vecContents = fs.readFileSync(path.join(__dirname, `./${set}/${model}/itemvectors.txt`), {
+      encoding: 'utf-8'
+    });
+
+    const vectors = vecContents
+      .split('\n')
+      .map(line => line.split(' ').map(n => Number(n)))
+
+    fs.writeFileSync(path.join(__dirname, `../src/data/${set}/${model}/item_vectors.json`), JSON.stringify(vectors));
   });
-
-  const vectors = vecContents
-    .split('\n')
-    .map(line => line.split(' ').map(n => Number(n)))
-
-  fs.writeFileSync(path.join(__dirname, '../src/data/item_vector.json'), JSON.stringify(vectors));
 }
 
 
 switch (command.toLowerCase()) {
-  case 'usernodes':
-    genUserNodes();
+  case 'amazon':
+    genUserNodes('amazon');
+    genItems('amazon');
     break;
 
-  case 'items':
-    genItems();
-    break;
-
-  case 'itemvectors':
+  case 'yelp':
+    genUserNodes('yelp');
+    genItems('yelp');
     break;
 
   default:
-    genUserNodes();
-    genItems();
+    genUserNodes('amazon');
+    genItems('amazon');
+    genUserNodes('yelp');
+    genItems('yelp');
     break;
 }
