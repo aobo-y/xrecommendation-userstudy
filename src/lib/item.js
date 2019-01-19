@@ -29,7 +29,7 @@ const setContext = (set, model) => {
   itemVectors = math.matrix(allData[set][model].vectors);
 }
 
-const getNode = id => itemNodes[id - 1];
+const getNode = id => itemNodes ? itemNodes[id - 1] : null;
 
 export const getTopKItems = (vector, k) => {
   const result = math.multiply(itemVectors, vector).toArray();
