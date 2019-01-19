@@ -20,13 +20,16 @@ import styles from './index.module.css';
 
 const ITEM_NUM = 5;
 
+userTree.setContext('amazon', 'MFCT');
+itemTree.setContext('amazon', 'MFCT');
+
 class Main extends PureComponent {
   static propTypes = {
     onEnd: PropTypes.func.isRequired
   }
 
   state = {
-    userNodes: [userTree.root],
+    userNodes: [userTree.getRoot()],
     itemNodes: []
   }
 

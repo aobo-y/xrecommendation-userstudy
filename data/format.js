@@ -20,7 +20,7 @@ function genUserNodes(set) {
         gtId: node.Childnode_Greater_Id,
         nGtId: node.Childnode_NoGreater_Id,
         unknownId: node.Childnode_Unknown_Id,
-        vector: node.User_vector.split(' ').map(n => Number(n))
+        vector: node.User_vector.split(', ').map(n => Number(n))
       };
     });
 
@@ -99,6 +99,8 @@ function genItems(set) {
 
     const vectors = vecContents
       .split('\n')
+      .map(line => line.trim())
+      .filter(line => Boolean(line))
       .map(line => line.split(' ').map(n => Number(n)))
 
     fs.writeFileSync(path.join(__dirname, `../src/data/${set}/${model}/item_vectors.json`), JSON.stringify(vectors));

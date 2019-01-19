@@ -1,11 +1,33 @@
 import math from 'mathjs';
 import TinyQueue from 'tinyqueue';
 
-import itemVectorsData from '../data/item_vector';
-import itemList from '../data/item_list';
-import itemNodes from '../data/item_nodes';
+import amazonList from '../data/amazon/item_list';
+import amazonFmfVectorsData from '../data/amazon/fMf/item_vectors';
+import amazonMFCTVectorsData from '../data/amazon/MFCT/item_vectors';
+import amazonMFCTNodes from '../data/amazon/MFCT/item_nodes';
 
-const itemVectors = math.matrix(itemVectorsData);
+const allData = {
+  amazon: {
+    fMf: {vectors: amazonFmfVectorsData},
+    MFCT: {
+      nodes: amazonMFCTNodes,
+      vectors: amazonMFCTVectorsData
+    },
+
+    list: amazonList
+  },
+  yelp: {}
+}
+
+let itemList;
+let itemNodes;
+let itemVectors;
+
+const setContext = (set, model) => {
+  itemList = allData[set].list;
+  itemNodes = allData[set][model].nodes;
+  itemVectors = math.matrix(allData[set][model].vectors);
+}
 
 const getNode = id => itemNodes[id - 1];
 
@@ -48,5 +70,7 @@ export const getTopKItems = (vector, k) => {
 };
 
 export default {
+  setContext,
+
   getTopKItems
 };
