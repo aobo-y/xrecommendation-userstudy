@@ -47,6 +47,8 @@ class Main extends PureComponent {
         userNodes: [userTree.getRoot()],
         context: {dataset, model}
       });
+
+      this.showWarning();
     }
   }
 
@@ -81,7 +83,15 @@ class Main extends PureComponent {
         </Button>
       ),
       onClose: this.props.onEnd
-    })
+    });
+  }
+
+  showWarning = () => {
+    notification.warning({
+      duration: 10,
+      message: 'Attention',
+      description: 'Please rate each feature according to your preference. Your behavior on this page will be recorded, and no token will be given to acquire reward on MTurk if you just randomly assign scores. Thanks!'
+    });
   }
 
   render() {
