@@ -19,8 +19,9 @@ class QuestionList extends Component {
         itemLayout="vertical"
         size="large"
         dataSource={questions}
+        rowKey="id"
         renderItem={(question, idx) => (
-          <List.Item key={question.id}>
+          <List.Item>
             {
               question.submitted ?
                 <QuestionItem id={idx + 1} feature={question.feature} splitValue={question.splitValue} submitted /> :

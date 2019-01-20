@@ -1,20 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import { List, Tag, Icon, Tooltip, Empty, ConfigProvider } from 'antd';
+import { List, Tag, Icon, Collapse, Empty, ConfigProvider } from 'antd';
 
-const IconText = ({ type, text, exp }) => (
-  <Tooltip
-    title={`From your history, we think you will like the features ${exp.join(', ')}`}
-    placement="bottomLeft"
-    trigger={['hover', 'click', 'focus']}
-  >
-    <span>
-      <Icon type={type} style={{ marginRight: 8 }} />
-      {text}
-    </span>
-  </Tooltip>
-);
 
 const renderEmpty = () => <Empty description="Please answer the questions first..." />
 
@@ -33,11 +21,9 @@ class ItemList extends Component {
           size="large"
           dataSource={items}
           footer={<div><b>{items.length}</b> items</div>}
+          rowKey="id"
           renderItem={item => (
-            <List.Item
-              key={item.id}
-              actions={[<IconText type="solution" text="Explanation" exp={item.exp} />]}
-            >
+            <List.Item>
               <List.Item.Meta
                 title={
                   <a href={`https://www.amazon.com/gp/product/${item.id}`} target="_blank" rel="noopener noreferrer">
@@ -52,6 +38,15 @@ class ItemList extends Component {
                   </Tag>
                 )
               }
+              <Collapse defaultActiveKey={[]} bordered={false} >
+                <Collapse.Panel
+                  key="1"
+                  header={<><Icon type="solution" style={{ marginRight: 8 }} />Explanation</>}
+                  style={{border: 0}}
+                >
+                  <p>{`From your history, we think you will like the features ${item.exp.join(', ')}`}</p>
+                </Collapse.Panel>
+              </Collapse>
             </List.Item>
           )}
         />
