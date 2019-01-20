@@ -31,7 +31,7 @@ class App extends Component {
         {end &&
           <Alert
             message="Successfully Completed"
-            description={<>Please follow this link to the <a href="http://www.cs.virginia.edu/~hw5x/HCDM/">survey</a>.</>}
+            description={<>Please follow this link to the <a href="http://www.cs.virginia.edu/~hw5x/HCDM/" rel="noopener noreferrer">survey</a>.</>}
             type="success"
             banner
           />
