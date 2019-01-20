@@ -63,7 +63,7 @@ function genItems(set) {
         };
       } else {
         prev[idx] = {
-          name: line[2],
+          name: line[2].replace('&amp;', '&'),
           tags: []
         };
       }
