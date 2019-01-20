@@ -78,7 +78,7 @@ class Main extends PureComponent {
       message: 'Congratulation!',
       description: 'You have answered all questions. Now you can review our final recommendations customized for you. Please follow the button below to tell us how you feel about this experience.',
       btn: (
-        <Button type="primary" href="http://www.cs.virginia.edu/~hw5x/HCDM/" target="_blank" rel="noopener noreferrer">
+        <Button type="primary" href="http://yingkebao.top/web/formview/5c439cacfc918f0bcc205db2" target="_blank" rel="noopener noreferrer">
           Survey
         </Button>
       ),
