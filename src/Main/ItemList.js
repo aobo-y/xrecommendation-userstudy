@@ -21,7 +21,7 @@ class ItemList extends Component {
           size="large"
           dataSource={items}
           footer={<div><b>{items.length}</b> items</div>}
-          rowKey="id"
+          rowKey={item => item.id}
           renderItem={item => (
             <List.Item>
               <List.Item.Meta
