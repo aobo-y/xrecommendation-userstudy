@@ -12,15 +12,16 @@ const id = shortid.generate();
 
 class App extends Component {
   state = {
-    end: false
+    end: false,
+    showSurvey: false
   }
 
-  onEnd = () => {
-    this.setState({end: true});
+  onEnd = (showSurvey) => {
+    this.setState({end: true, showSurvey});
   }
 
   render() {
-    const { end } = this.state;
+    const { end, showSurvey } = this.state;
 
     return (
       <Layout className="layout">
@@ -31,7 +32,7 @@ class App extends Component {
         {end &&
           <Alert
             message="Successfully Completed"
-            description={<>Please follow this link to the <a href="http://yingkebao.top/web/formview/5c439cacfc918f0bcc205db2" rel="noopener noreferrer">survey</a>.</>}
+            description={showSurvey ? <>Please follow this link to the <a href="http://yingkebao.top/web/formview/5c439cacfc918f0bcc205db2" rel="noopener noreferrer">survey</a>.</> : ''}
             type="success"
             banner
           />

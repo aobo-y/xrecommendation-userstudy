@@ -49,6 +49,7 @@ class Main extends PureComponent {
       });
 
       this.showWarning();
+      this.startTime = new Date();
     }
   }
 
@@ -68,22 +69,30 @@ class Main extends PureComponent {
     });
 
     if (newNode.isLeaf) {
-      this.showNotification();
+      const showSurvey = ((new Date()) - this.startTime) > 20000;
+      this.showNotification(showSurvey);
     }
   }
 
-  showNotification = () => {
-    notification.success({
+  showNotification = (showSurvey) => {
+    const config = {
       duration: 0,
       message: 'Congratulation!',
-      description: 'You have answered all questions. Now you can review our final recommendations customized for you. Please follow the button below to tell us how you feel about this experience.',
-      btn: (
+      description: 'You have answered all questions. Now you can review our final recommendations customized for you.',
+      onClose: this.props.onEnd.bind(this, showSurvey)
+    };
+
+    if (showSurvey) {
+      config.btn = (
         <Button type="primary" href="http://yingkebao.top/web/formview/5c439cacfc918f0bcc205db2" target="_blank" rel="noopener noreferrer">
           Survey
         </Button>
-      ),
-      onClose: this.props.onEnd
-    });
+      );
+
+      config.description += ' Please follow the button below to tell us how you feel about this experience.';
+    }
+
+    notification.success(config);
   }
 
   showWarning = () => {
