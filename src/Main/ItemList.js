@@ -38,15 +38,19 @@ class ItemList extends Component {
                   </Tag>
                 )
               }
-              <Collapse defaultActiveKey={[]} bordered={false} >
-                <Collapse.Panel
-                  key="1"
-                  header={<><Icon type="solution" style={{ marginRight: 8 }} />Explanation</>}
-                  style={{border: 0}}
-                >
-                  <p>{`From your history, we think you will like the features ${item.exp.join(', ')}`}</p>
-                </Collapse.Panel>
-              </Collapse>
+              {
+                Boolean(item.exp.length) && (
+                  <Collapse defaultActiveKey={[]} bordered={false} >
+                    <Collapse.Panel
+                      key="1"
+                      header={<><Icon type="solution" style={{ marginRight: 8 }} />Explanation</>}
+                      style={{border: 0}}
+                    >
+                      <p>{`From your history, we think you will like the features ${item.exp.join(', ')}`}</p>
+                    </Collapse.Panel>
+                  </Collapse>
+                )
+              }
             </List.Item>
           )}
         />
