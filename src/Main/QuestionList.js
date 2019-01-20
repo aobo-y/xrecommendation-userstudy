@@ -23,8 +23,8 @@ class QuestionList extends Component {
           <List.Item key={question.id}>
             {
               question.submitted ?
-                <QuestionItem id={idx + 1} feature={question.feature} submitted /> :
-                <QuestionItem id={idx + 1} feature={question.feature} onSubmit={v => onSubmit(question.id, v)} />
+                <QuestionItem id={idx + 1} feature={question.feature} splitValue={question.splitValue} submitted /> :
+                <QuestionItem id={idx + 1} feature={question.feature} splitValue={question.splitValue} onSubmit={v => onSubmit(question.id, v)} />
             }
           </List.Item>
         )}

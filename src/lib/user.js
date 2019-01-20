@@ -25,7 +25,7 @@ export const getRoot = () => nodes[0];
 
 export const nextNode = (nodeId, value) => {
   const node = getNodeById(nodeId);
-  const { splitValue, gtId, nGtId }  = node;
+  const { splitValue = 50, gtId, nGtId }  = node;
 
   let nextId;
   if (value < 0) {
