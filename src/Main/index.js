@@ -16,6 +16,7 @@ import ContextModal from './ContextModal';
 
 import userTree from '../lib/user';
 import itemTree from '../lib/item';
+import surveys from '../lib/surveys';
 
 import styles from './index.module.css';
 
@@ -29,7 +30,8 @@ class Main extends PureComponent {
   state = {
     userNodes: [],
     itemNodes: [],
-    context: null
+    context: null,
+    survey: null
   }
 
   componentDidMount() {
@@ -45,7 +47,8 @@ class Main extends PureComponent {
 
       this.setState({
         userNodes: [userTree.getRoot()],
-        context: {dataset, model}
+        context: {dataset, model},
+        survey: surveys[dataset][model]
       });
 
       this.showWarning();
@@ -79,12 +82,12 @@ class Main extends PureComponent {
       duration: 0,
       message: 'Congratulation!',
       description: 'You have answered all questions. Now you can review our final recommendations customized for you.',
-      onClose: this.props.onEnd.bind(this, showSurvey)
+      onClose: () => this.props.onEnd(showSurvey ? this.state.survey : null)
     };
 
     if (showSurvey) {
       config.btn = (
-        <Button type="primary" href="http://yingkebao.top/web/formview/5c439cacfc918f0bcc205db2" target="_blank" rel="noopener noreferrer">
+        <Button type="primary" href={this.state.survey} target="_blank" rel="noopener noreferrer">
           Survey
         </Button>
       );
