@@ -58,12 +58,14 @@ class QuestionItem extends PureComponent {
   static propTypes = {
     id: PropTypes.number.isRequired,
     feature: PropTypes.string.isRequired,
+    question: PropTypes.string,
     splitValue: PropTypes.number,
     submitted: PropTypes.bool,
     onSubmit: PropTypes.func
   }
 
   static defaultProps = {
+    question: null,
     splitValue: null,
     submitted: false
   }
@@ -105,12 +107,12 @@ class QuestionItem extends PureComponent {
   }
 
   render() {
-    const {id, feature, submitted, splitValue} = this.props;
+    const {id, feature, submitted, splitValue, question} = this.props;
     const { value } = this.state;
 
     return (
       <>
-        <p>Q{id}. How much do you like <strong>{feature}</strong>?</p>
+        <p>Q{id}. {question || `How much do you like ${feature}?`}</p>
         {
           splitValue ?
             <SliderAnswer

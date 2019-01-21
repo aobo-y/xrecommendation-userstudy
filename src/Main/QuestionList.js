@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
 import { List } from 'antd';
 
 import QuestionItem from './QuestionItem';
 
-class QuestionList extends Component {
+class QuestionList extends PureComponent {
   static propTypes = {
     questions: PropTypes.arrayOf(PropTypes.object),
     onSubmit: PropTypes.func.isRequired
@@ -22,11 +22,14 @@ class QuestionList extends Component {
         rowKey="id"
         renderItem={(question, idx) => (
           <List.Item>
-            {
-              question.submitted ?
-                <QuestionItem id={idx + 1} feature={question.feature} splitValue={question.splitValue} submitted /> :
-                <QuestionItem id={idx + 1} feature={question.feature} splitValue={question.splitValue} onSubmit={v => onSubmit(question.id, v)} />
-            }
+            <QuestionItem
+              id={idx + 1}
+              feature={question.feature}
+              question={question.question}
+              splitValue={question.splitValue}
+              submitted={question.submitted}
+              onSubmit={question.submitted ? null : v => onSubmit(question.id, v)}
+            />
           </List.Item>
         )}
       />

@@ -14,7 +14,7 @@ function genUserNodes(set) {
     const nodes = require(`./${set}/${model}/usernodes.json`).map(node => {
       return {
         id: node.NodeId,
-        feature: (model === 'fMf' ? node.Item_Name : node.Feature_Name).trim() ,
+        feature: (model === 'fMf' ? node.Item_Name : node.Feature_Name.toLowerCase()).trim(),
         isLeaf: node.Isleafnode === 'true',
         splitValue: node.Feature_SplitValue || null,
         gtId: node.Childnode_Greater_Id,
@@ -24,8 +24,29 @@ function genUserNodes(set) {
       };
     });
 
+    if (model === 'MFCT') {
+      const questions = require(`./${set}/MFCT/questions.json`);
+      const questionMap = require(`./${set}/MFCT/questionmap.json`);
+
+      nodes.forEach(node => {
+        if (node.isLeaf) return;
+
+        let question = questionMap[node.feature];
+        if (!question) {
+          console.warning('Cannot map question for feature:', node.feature)
+          return;
+        }
+
+        if (question.length === 1) {
+          question = questions[Number(question) - 1].replace('XXX', node.feature);
+        }
+
+        node.question = question;
+      })
+    }
+
     fs.writeFileSync(path.join(__dirname, `../src/data/${set}/${model}/user_nodes.json`), JSON.stringify(nodes));
-  })
+  });
 }
 
 function genItems(set) {
