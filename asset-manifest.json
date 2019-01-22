@@ -1,15 +1,15 @@
 {
   "main.css": "/explanation-recommendation/static/css/main.6ab6b1ba.chunk.css",
-  "main.js": "/explanation-recommendation/static/js/main.7be899bf.chunk.js",
-  "main.js.map": "/explanation-recommendation/static/js/main.7be899bf.chunk.js.map",
+  "main.js": "/explanation-recommendation/static/js/main.6302f4f8.chunk.js",
+  "main.js.map": "/explanation-recommendation/static/js/main.6302f4f8.chunk.js.map",
   "static/css/1.9ca5fbcd.chunk.css": "/explanation-recommendation/static/css/1.9ca5fbcd.chunk.css",
   "static/js/1.d3493c60.chunk.js": "/explanation-recommendation/static/js/1.d3493c60.chunk.js",
   "static/js/1.d3493c60.chunk.js.map": "/explanation-recommendation/static/js/1.d3493c60.chunk.js.map",
   "runtime~main.js": "/explanation-recommendation/static/js/runtime~main.9567f3f5.js",
   "runtime~main.js.map": "/explanation-recommendation/static/js/runtime~main.9567f3f5.js.map",
-  "static/css/main.6ab6b1ba.chunk.css.map": "/explanation-recommendation/static/css/main.6ab6b1ba.chunk.css.map",
   "static/css/1.9ca5fbcd.chunk.css.map": "/explanation-recommendation/static/css/1.9ca5fbcd.chunk.css.map",
+  "static/css/main.6ab6b1ba.chunk.css.map": "/explanation-recommendation/static/css/main.6ab6b1ba.chunk.css.map",
   "index.html": "/explanation-recommendation/index.html",
-  "precache-manifest.bf550f0eab8507f19c15266524ae50b8.js": "/explanation-recommendation/precache-manifest.bf550f0eab8507f19c15266524ae50b8.js",
+  "precache-manifest.ed691651295ec7a26f93deedee474a61.js": "/explanation-recommendation/precache-manifest.ed691651295ec7a26f93deedee474a61.js",
   "service-worker.js": "/explanation-recommendation/service-worker.js"
 }
