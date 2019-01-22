@@ -34,6 +34,19 @@ const setContext = (set, model, random) => {
 
 const getNode = id => itemNodes ? itemNodes[id - 1] : null;
 
+let noLeafItemNodes;
+const genRandomExp = exp => {
+  return exp.map(_ => {
+    if (!noLeafItemNodes) {
+      noLeafItemNodes = itemNodes.filter(node => !node.isLeaf);
+    }
+
+    const feature = noLeafItemNodes[Math.floor(Math.random() * noLeafItemNodes.length)].feature;
+    const status = ['positive', 'negative', 'unknown'][Math.floor(Math.random() * 3)];
+
+    return feature + ' is ' + status;
+  });
+}
 
 const genExp = id => {
   const exp = [];
@@ -91,7 +104,10 @@ export const getTopKItems = (vector, k) => {
     const { idx } = queue.pop();
     const item = itemList[idx];
 
-    const exp = genExp(item.parentId);
+    let exp = genExp(item.parentId);
+    if (randomExp) {
+      exp = genRandomExp(exp);
+    }
 
     items.push({
       id: idx,
