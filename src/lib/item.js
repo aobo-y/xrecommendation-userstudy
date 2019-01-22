@@ -22,14 +22,55 @@ const allData = {
 let itemList;
 let itemNodes;
 let itemVectors;
+let randomExp;
 
-const setContext = (set, model) => {
+const setContext = (set, model, random) => {
   itemList = allData[set].list;
   itemNodes = allData[set][model].nodes;
   itemVectors = math.matrix(allData[set][model].vectors);
+
+  randomExp = random;
 }
 
 const getNode = id => itemNodes ? itemNodes[id - 1] : null;
+
+
+const genExp = id => {
+  const exp = [];
+
+  let childNode = getNode(id);
+
+  if (!childNode) return exp;
+
+  let node = getNode(childNode.parentId);
+
+  while (node) {
+    let str = node.feature + ' is ';
+    switch (childNode.id) {
+      case node.gtId:
+        str += 'positive';
+        break;
+
+      case node.nGtId:
+        str += 'negative';
+        break;
+
+      case node.unknownId:
+        str += 'unknown';
+        break;
+
+      default:
+        break;
+    }
+    exp.push(str);
+
+    childNode = node;
+    node = node.parentId < 0 ? null : getNode(node.parentId);
+  }
+
+  return exp;
+}
+
 
 export const getTopKItems = (vector, k) => {
   const result = math.multiply(itemVectors, vector).toArray();
@@ -50,15 +91,7 @@ export const getTopKItems = (vector, k) => {
     const { idx } = queue.pop();
     const item = itemList[idx];
 
-    const exp = [];
-    let node = getNode(item.parentId);
-
-    while(node) {
-      if (node.feature) {
-        exp.push(node.feature);
-      }
-      node = node.parentId < 0 ? null : getNode(node.parentId);
-    }
+    const exp = genExp(item.parentId);
 
     items.push({
       id: idx,

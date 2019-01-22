@@ -55,6 +55,9 @@ function genItems(set) {
       id: node.NodeId,
       feature: node.Feature_Name.trim(),
       parentId: node.Parent_NodeId,
+      gtId: node.Childnode_Greater_Id,
+      nGtId: node.Childnode_NoGreater_Id,
+      unknownId: node.Childnode_Unknown_Id,
       isLeaf: node.Isleafnode === 'true',
       items: node.Items
     };

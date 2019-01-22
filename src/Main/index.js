@@ -39,21 +39,30 @@ class Main extends PureComponent {
   }
 
   setContext = () => {
-    const {dataset, model} = qs.parse(window.location.search);
+    let {dataset, model, random} = qs.parse(window.location.search);
 
-    if (dataset && model) {
+    if (this.verifyContext(dataset, model, random)) {
+      random = random === 'true';
+
       userTree.setContext(dataset, model);
-      itemTree.setContext(dataset, model);
+      itemTree.setContext(dataset, model, random);
 
       this.setState({
         userNodes: [userTree.getRoot()],
-        context: {dataset, model},
+        context: {dataset, model, random},
         survey: surveys[dataset][model]
       });
 
       this.showWarning();
       this.startTime = new Date();
     }
+  }
+
+  verifyContext = (dataset, model, random) => {
+    if (!['amazon', 'yelp'].includes(dataset)) return false;
+    if (!['fMf', 'MFCT'].includes(model)) return false;
+    if (!['true', 'false'].includes(random)) return false;
+    return true;
   }
 
   onContextSubmit = context => {

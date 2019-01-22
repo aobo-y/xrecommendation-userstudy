@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import {
-  Modal, Form, Radio, Button
+  Modal, Form, Radio, Button, Switch
 } from 'antd';
 
 class ContextModal extends PureComponent {
@@ -12,7 +12,8 @@ class ContextModal extends PureComponent {
 
   state = {
     dataset: 'amazon',
-    model: 'MFCT'
+    model: 'MFCT',
+    random: false
   }
 
   onDatasetChange = e => {
@@ -23,13 +24,17 @@ class ContextModal extends PureComponent {
     this.setState({ model: e.target.value });
   }
 
+  onRandomChange = checked => {
+    this.setState({ random: checked });
+  }
+
   onSubmit = () => {
     this.props.onSubmit({...this.state});
   }
 
   render() {
     const { visible } = this.props;
-    const { dataset, model } = this.state;
+    const { dataset, model, random } = this.state;
 
     return (
       <Modal
@@ -55,6 +60,12 @@ class ContextModal extends PureComponent {
               <Radio.Button value="fMf">fMf</Radio.Button>
               <Radio.Button value="MFCT">MFCT</Radio.Button>
             </Radio.Group>
+          </Form.Item>
+
+          <Form.Item
+            label="Random Explanation"
+          >
+            <Switch checked={random} onChange={this.onRandomChange} />,
           </Form.Item>
 
           <Form.Item>
