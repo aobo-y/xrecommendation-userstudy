@@ -42,9 +42,9 @@ const genRandomExp = exp => {
     }
 
     const feature = noLeafItemNodes[Math.floor(Math.random() * noLeafItemNodes.length)].feature;
-    const status = ['positive', 'negative', 'unknown'][Math.floor(Math.random() * 3)];
+    const status = [' is positive', ' is negative', ''][Math.floor(Math.random() * 3)];
 
-    return feature + ' is ' + status;
+    return feature + status;
   });
 }
 
@@ -58,18 +58,14 @@ const genExp = id => {
   let node = getNode(childNode.parentId);
 
   while (node) {
-    let str = node.feature + ' is ';
+    let str = node.feature;
     switch (childNode.id) {
       case node.gtId:
-        str += 'positive';
+        str += ' is positive';
         break;
 
       case node.nGtId:
-        str += 'negative';
-        break;
-
-      case node.unknownId:
-        str += 'unknown';
+        str += ' is negative';
         break;
 
       default:
