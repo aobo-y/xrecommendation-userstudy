@@ -8,11 +8,12 @@ const renderEmpty = () => <Empty description="Please answer the questions first.
 
 class ItemList extends Component {
   static propTypes = {
-    items: PropTypes.arrayOf(PropTypes.object)
+    items: PropTypes.arrayOf(PropTypes.object),
+    onExpand: PropTypes.func.isRequired
   }
 
   render() {
-    const { items } = this.props;
+    const { items, onExpand } = this.props;
 
     return (
       <ConfigProvider renderEmpty={renderEmpty}>
@@ -40,7 +41,7 @@ class ItemList extends Component {
               }
               {
                 Boolean(item.exp.length) && (
-                  <Collapse defaultActiveKey={[]} bordered={false} >
+                  <Collapse defaultActiveKey={[]} bordered={false} onChange={onExpand}>
                     <Collapse.Panel
                       key="1"
                       header={<><Icon type="solution" style={{ marginRight: 8 }} />Explanation</>}

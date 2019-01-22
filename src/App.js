@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Layout, Icon, Alert } from 'antd';
+import { Layout, Icon } from 'antd';
 import shortid from 'shortid';
 
 import Main from './Main';
@@ -11,17 +11,7 @@ const { Header, Content, Footer } = Layout;
 const id = shortid.generate();
 
 class App extends Component {
-  state = {
-    end: false,
-    survey: null
-  }
-
-  onEnd = (survey) => {
-    this.setState({end: true, survey});
-  }
-
   render() {
-    const { end, survey } = this.state;
 
     return (
       <Layout className="layout">
@@ -29,14 +19,6 @@ class App extends Component {
           <div className={styles.profile}><Icon type="user" /> {id}</div>
           <span className={styles.logo}>Explanation Recommendation System</span>
         </Header>
-        {end &&
-          <Alert
-            message="Successfully Completed"
-            description={survey ? <>Please follow this link to the <a href={survey} target="_blank" rel="noopener noreferrer">survey</a>.</> : ''}
-            type="success"
-            banner
-          />
-        }
         <Content className={styles.content}>
           <Main onEnd={this.onEnd} />
         </Content>

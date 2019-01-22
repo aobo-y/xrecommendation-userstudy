@@ -7,12 +7,14 @@ import {
   Button,
   Icon,
   Row,
-  Col
+  Col,
+  Alert
 } from 'antd';
 
 import QuestionList from './QuestionList';
 import ItemList from './ItemList';
 import ContextModal from './ContextModal';
+import SurveyModal from './SurveyModal';
 
 import userTree from '../lib/user';
 import itemTree from '../lib/item';
@@ -23,15 +25,13 @@ import styles from './index.module.css';
 const ITEM_NUM = 5;
 
 class Main extends PureComponent {
-  static propTypes = {
-    onEnd: PropTypes.func.isRequired
-  }
-
   state = {
     userNodes: [],
     itemNodes: [],
     context: null,
-    survey: null
+    survey: null,
+    expExpanded: false,
+    step: null // 'review', 'end'
   }
 
   componentDidMount() {
@@ -49,8 +49,7 @@ class Main extends PureComponent {
 
       this.setState({
         userNodes: [userTree.getRoot()],
-        context: {dataset, model, random},
-        survey: surveys[dataset][model]
+        context: {dataset, model, random}
       });
 
       this.showWarning();
@@ -81,28 +80,42 @@ class Main extends PureComponent {
     });
 
     if (newNode.isLeaf) {
-      const showSurvey = ((new Date()) - this.startTime) > 20000;
-      this.showNotification(showSurvey);
+      this.setState({
+        step: 'review'
+      });
+      this.showNotification();
     }
+  }
+
+  onExpExpand = () => {
+    if (this.state.expExpanded) return;
+    this.setState({ expExpanded: true });
+  }
+
+  onEnd = () => {
+    const { context, expExpanded } = this.state;
+    const { dataset, model, ..._ } = context;
+
+    const lastEnough = ((new Date()) - this.startTime) > 20000;
+    const expChecked = model !== 'MFCT' || expExpanded;
+
+    let survey = null;
+    if (lastEnough && expChecked) {
+      survey = surveys[dataset][model];
+    }
+
+    this.setState({
+      step: 'end',
+      survey
+    });
   }
 
   showNotification = (showSurvey) => {
     const config = {
-      duration: 0,
+      duration: 10,
       message: 'Congratulation!',
-      description: 'You have answered all questions. Now you can review our final recommendations customized for you.',
-      onClose: () => this.props.onEnd(showSurvey ? this.state.survey : null)
+      description: 'You have answered all questions. Now please review our final recommendations customized for you. Then click the "Finish" button in the banner to end.'
     };
-
-    if (showSurvey) {
-      config.btn = (
-        <Button type="primary" href={this.state.survey} target="_blank" rel="noopener noreferrer">
-          Survey
-        </Button>
-      );
-
-      config.description += ' Please follow the button below to tell us how you feel about this experience.';
-    }
 
     notification.success(config);
   }
@@ -116,10 +129,25 @@ class Main extends PureComponent {
   }
 
   render() {
-    const { userNodes, itemNodes, context } = this.state;
+    const { userNodes, itemNodes, context, survey, step } = this.state;
 
     return (
       <>
+        {
+          step === 'review' &&
+            <Alert
+              message="Finish the experiement"
+              description={(
+                <>
+                  Click the <Button type="danger" onClick={this.onEnd}>Finish</Button> to end if you have reviewed the results. Please notice You cannot go back after clicking it.
+                </>
+              )}
+              type="info"
+              showIcon
+              style={{marginBottom: 24}}
+            />
+        }
+
         <Row gutter={24}>
           <Col xs={24} sm={24} md={24} lg={9} xl={7}>
             <Card title={(<><Icon type="question" className={styles.icon} />Questions</>)} style={{marginBottom: 16}}>
@@ -129,12 +157,13 @@ class Main extends PureComponent {
 
           <Col xs={24} sm={24} md={24} lg={15} xl={17}>
             <Card title={(<><Icon type="heart" className={styles.icon} />Recommendations</>)}>
-              <ItemList items={itemNodes} />
+              <ItemList items={itemNodes} onExpand={this.onExpExpand} />
             </Card>
           </Col>
         </Row>
 
         <ContextModal visible={!Boolean(context)} onSubmit={this.onContextSubmit} />
+        <SurveyModal visible={step === 'end'} survey={survey} />
       </>
     );
   }
