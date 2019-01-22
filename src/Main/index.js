@@ -18,7 +18,7 @@ import SurveyModal from './SurveyModal';
 
 import userTree from '../lib/user';
 import itemTree from '../lib/item';
-import surveys from '../lib/surveys';
+import { getSurvey } from '../lib/surveys';
 
 import styles from './index.module.css';
 
@@ -94,14 +94,14 @@ class Main extends PureComponent {
 
   onEnd = () => {
     const { context, expExpanded } = this.state;
-    const { dataset, model, ..._ } = context;
+    const { dataset, model, random } = context;
 
     const lastEnough = ((new Date()) - this.startTime) > 20000;
     const expChecked = model !== 'MFCT' || expExpanded;
 
     let survey = null;
     if (lastEnough && expChecked) {
-      survey = surveys[dataset][model];
+      survey = getSurvey(dataset, model, random);
     }
 
     this.setState({
@@ -110,7 +110,7 @@ class Main extends PureComponent {
     });
   }
 
-  showNotification = (showSurvey) => {
+  showNotification = () => {
     const config = {
       duration: 10,
       message: 'Congratulation!',

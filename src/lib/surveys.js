@@ -1,7 +1,8 @@
 const surveys = {
   amazon: {
     fMf: 'http://yingkebao.top/web/formview/5c45387afc918f0bcc22d1bf',
-    MFCT: 'http://yingkebao.top/web/formview/5c4537e8fc918f0bcc22d03e'
+    MFCT: 'http://yingkebao.top/web/formview/5c4537e8fc918f0bcc22d03e',
+    MFCTRand: 'http://yingkebao.top/web/formview/5c46a6fefc918f0bcc25f638'
   },
   yelp: {
     fMf: 'http://koudaigou.net/web/formview/5c453844fc918f0bcc22d133',
@@ -9,4 +10,14 @@ const surveys = {
   }
 }
 
-export default surveys;
+export const getSurvey = (dataset, model, random) => {
+  if (model === 'MFCT' && random) {
+    model += 'Rand';
+  }
+  return surveys[dataset][model];
+}
+
+export default {
+  getSurvey,
+  surveys
+};
