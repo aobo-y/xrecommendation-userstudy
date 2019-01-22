@@ -60,7 +60,7 @@ class Main extends PureComponent {
   verifyContext = (dataset, model, random) => {
     if (!['amazon', 'yelp'].includes(dataset)) return false;
     if (!['fMf', 'MFCT'].includes(model)) return false;
-    if (!['true', 'false'].includes(random)) return false;
+    if (random && !['true', 'false'].includes(random)) return false;
     return true;
   }
 
