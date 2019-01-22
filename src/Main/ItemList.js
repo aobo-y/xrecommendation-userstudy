@@ -46,7 +46,7 @@ class ItemList extends Component {
                       header={<><Icon type="solution" style={{ marginRight: 8 }} />Explanation</>}
                       style={{border: 0}}
                     >
-                      <p>{`From your history, we think you will like the features ${item.exp.join(', ')}`}</p>
+                      <p>{`From your history, we think you will like its features: ${item.exp.join(', ')}`}</p>
                     </Collapse.Panel>
                   </Collapse>
                 )
