@@ -88,7 +88,7 @@ function genItems(set) {
           name,
           tags,
           url: detail.url,
-          image: detail.image_url,
+          images: detail.photos,
           rating: detail.rating
         };
       } else {

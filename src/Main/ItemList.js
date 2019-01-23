@@ -1,18 +1,29 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import { List, Tag, Icon, Collapse, Empty, ConfigProvider, Rate } from 'antd';
+import { List, Tag, Icon, Collapse, Empty, ConfigProvider, Rate, Carousel } from 'antd';
 
 
 const renderEmpty = () => <Empty description="Please answer the questions first..." />
 
-const Image = ({url}) => {
+const Images = ({urls}) => {
   return (
-    <div style={{textAlign: 'center', width: 252, height: 182}}>
-      <img src={url} style={{width: '100%', height: '100%', objectFit: 'cover'}} />
+    <div style={{width: 252}}>
+      <Carousel autoplay>
+        {
+          urls.map(url => (
+            <div key={url}>
+              <div style={{textAlign: 'center', width: 252, height: 182}}>
+                <img  src={url} style={{width: '100%', height: '100%', objectFit: 'cover'}} />
+              </div>
+            </div>
+          ))
+        }
+      </Carousel>
     </div>
-  );
+  )
 }
+
 class ItemList extends Component {
   static propTypes = {
     items: PropTypes.arrayOf(PropTypes.object),
@@ -32,7 +43,7 @@ class ItemList extends Component {
           rowKey={item => item.id}
           renderItem={item => (
             <List.Item
-              extra={item.image ? <Image url={item.image}/> : undefined}
+              extra={item.images ? <Images urls={item.images}/> : undefined}
             >
               <List.Item.Meta
                 title={
