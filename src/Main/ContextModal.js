@@ -11,7 +11,7 @@ class ContextModal extends PureComponent {
   }
 
   state = {
-    dataset: 'amazon',
+    dataset: 'yelp',
     model: 'MFCT',
     random: false
   }
@@ -49,7 +49,7 @@ class ContextModal extends PureComponent {
           >
             <Radio.Group value={dataset} onChange={this.onDatasetChange}>
               <Radio.Button value="amazon">Amazon</Radio.Button>
-              {/* <Radio.Button value="yelp">Yelp</Radio.Button> */}
+              <Radio.Button value="yelp">Yelp</Radio.Button>
             </Radio.Group>
           </Form.Item>
 

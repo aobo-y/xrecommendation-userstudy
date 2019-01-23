@@ -1,5 +1,7 @@
 import amazonFmfNodes from '../data/amazon/fMf/user_nodes.json';
 import amazonMfctNodes from '../data/amazon/MFCT/user_nodes.json';
+import yelpFmfNodes from '../data/yelp/fMf/user_nodes.json';
+import yelpMfctNodes from '../data/yelp/MFCT/user_nodes.json';
 
 const allNodes = {
   amazon: {
@@ -8,7 +10,8 @@ const allNodes = {
   },
 
   yelp: {
-
+    fMf: yelpFmfNodes,
+    MFCT: yelpMfctNodes
   }
 };
 

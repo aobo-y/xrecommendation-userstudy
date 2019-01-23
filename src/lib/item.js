@@ -6,6 +6,11 @@ import amazonFmfVectorsData from '../data/amazon/fMf/item_vectors';
 import amazonMFCTVectorsData from '../data/amazon/MFCT/item_vectors';
 import amazonMFCTNodes from '../data/amazon/MFCT/item_nodes';
 
+import yelpList from '../data/yelp/item_list';
+import yelpFmfVectorsData from '../data/yelp/fMf/item_vectors';
+import yelpMFCTVectorsData from '../data/yelp/MFCT/item_vectors';
+import yelpMFCTNodes from '../data/yelp/MFCT/item_nodes';
+
 const allData = {
   amazon: {
     fMf: {vectors: amazonFmfVectorsData},
@@ -16,7 +21,15 @@ const allData = {
 
     list: amazonList
   },
-  yelp: {}
+  yelp: {
+    fMf: {vectors: yelpFmfVectorsData},
+    MFCT: {
+      nodes: yelpMFCTNodes,
+      vectors: yelpMFCTVectorsData
+    },
+
+    list: yelpList
+  }
 }
 
 let itemList;

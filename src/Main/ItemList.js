@@ -1,11 +1,18 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import { List, Tag, Icon, Collapse, Empty, ConfigProvider } from 'antd';
+import { List, Tag, Icon, Collapse, Empty, ConfigProvider, Rate } from 'antd';
 
 
 const renderEmpty = () => <Empty description="Please answer the questions first..." />
 
+const Image = ({url}) => {
+  return (
+    <div style={{textAlign: 'center', width: 252, height: 182}}>
+      <img src={url} style={{width: '100%', height: '100%', objectFit: 'cover'}} />
+    </div>
+  );
+}
 class ItemList extends Component {
   static propTypes = {
     items: PropTypes.arrayOf(PropTypes.object),
@@ -24,13 +31,16 @@ class ItemList extends Component {
           footer={<div><b>{items.length}</b> items</div>}
           rowKey={item => item.id}
           renderItem={item => (
-            <List.Item>
+            <List.Item
+              extra={item.image ? <Image url={item.image}/> : undefined}
+            >
               <List.Item.Meta
                 title={
                   <a href={item.url} target="_blank" rel="noopener noreferrer">
                     {item.name}
                   </a>
                 }
+                description={item.rating ? <Rate disabled allowHalf defaultValue={item.rating} /> : undefined}
               />
               {
                 item.tags.map((tag, idx) =>
