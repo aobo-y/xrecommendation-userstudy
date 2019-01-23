@@ -127,7 +127,7 @@ class Main extends PureComponent {
 
     const { dataset, scenario } = context;
 
-    const lastEnough = ((new Date()) - this.startTime) > 20000;
+    const lastEnough = ((new Date()) - this.startTime) > 40000;
     const expChecked = expExpanded;
 
     let survey = null;
