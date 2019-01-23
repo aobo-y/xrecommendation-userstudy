@@ -1,8 +1,10 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import {
-  Modal, Form, Radio, Button, Switch
+  Modal, Form, Radio, Button, Select
 } from 'antd';
+
+import scenarios from '../lib/scenarios';
 
 class ContextModal extends PureComponent {
   static propTypes = {
@@ -12,29 +14,30 @@ class ContextModal extends PureComponent {
 
   state = {
     dataset: 'yelp',
-    model: 'MFCT',
-    random: false
+    scenario: 0
   }
 
   onDatasetChange = e => {
     this.setState({ dataset: e.target.value });
   }
 
-  onModelChange = e => {
-    this.setState({ model: e.target.value });
-  }
-
-  onRandomChange = checked => {
-    this.setState({ random: checked });
+  onScenarioChange = v => {
+    this.setState({ scenario: v });
   }
 
   onSubmit = () => {
     this.props.onSubmit({...this.state});
   }
 
+  mapScenarioToStr = (scenario) => {
+    return scenario.map(step =>  {
+      return step.model + (step.random ? ' random' : '');
+    }).join(' vs ');
+  }
+
   render() {
     const { visible } = this.props;
-    const { dataset, model, random } = this.state;
+    const { dataset, scenario } = this.state;
 
     return (
       <Modal
@@ -54,18 +57,19 @@ class ContextModal extends PureComponent {
           </Form.Item>
 
           <Form.Item
-            label="Model"
+            label="Scenario"
           >
-            <Radio.Group value={model} onChange={this.onModelChange}>
-              <Radio.Button value="fMf">fMf</Radio.Button>
-              <Radio.Button value="MFCT">MFCT</Radio.Button>
-            </Radio.Group>
-          </Form.Item>
-
-          <Form.Item
-            label="Random Explanation"
-          >
-            <Switch checked={random} onChange={this.onRandomChange} />,
+            <Select
+              value={scenario}
+              onChange={this.onScenarioChange}
+              style={{width: 200}}
+            >
+              {
+                scenarios.map((s, idx) => (
+                  <Select.Option value={idx}>{idx}. {this.mapScenarioToStr(s)}</Select.Option>
+                ))
+              }
+            </Select>
           </Form.Item>
 
           <Form.Item>

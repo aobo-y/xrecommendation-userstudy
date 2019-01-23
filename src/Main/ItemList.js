@@ -14,7 +14,7 @@ const Images = ({urls}) => {
           urls.map(url => (
             <div key={url}>
               <div style={{textAlign: 'center', width: 252, height: 182}}>
-                <img  src={url} style={{width: '100%', height: '100%', objectFit: 'cover'}} />
+                <img  src={url} style={{width: '100%', height: '100%', objectFit: 'cover'}} alt="restaurants" />
               </div>
             </div>
           ))
