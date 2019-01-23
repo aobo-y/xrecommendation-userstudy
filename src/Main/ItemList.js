@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import { List, Tag, Icon, Collapse, Empty, ConfigProvider, Rate, Carousel } from 'antd';
+import { List, Tag, Icon, Collapse, Empty, ConfigProvider, Carousel } from 'antd';
 
 
 const renderEmpty = () => <Empty description="Please answer the questions first..." />
@@ -51,7 +51,6 @@ class ItemList extends Component {
                     {item.name}
                   </a>
                 }
-                description={item.rating ? <Rate disabled allowHalf defaultValue={item.rating} /> : undefined}
               />
               {
                 item.tags.map((tag, idx) =>
