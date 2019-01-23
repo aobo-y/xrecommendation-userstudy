@@ -33,7 +33,7 @@ function genUserNodes(set) {
 
         let question = questionMap[node.feature];
         if (!question) {
-          console.warning('Cannot map question for feature:', node.feature)
+          console.error('Cannot map question for feature:', node.feature)
           return;
         }
 
@@ -77,22 +77,28 @@ function genItems(set) {
       const idx = Number(line[0]);
 
       if (set === 'yelp') {
+        const details = require('./yelp/itemdetails.json');
+
+        const detail = details[line[1]] || {};
         const tagIndex = line[2].indexOf('[');
         const name = line[2].substring(0, tagIndex - 1);
         const tagStr = line[2].substring(tagIndex).replace(/\'/g, '"');
         const tags = JSON.parse(tagStr);
         prev[idx] = {
           name,
-          tags
+          tags,
+          url: detail.url,
+          image: detail.image_url,
+          rating: detail.rating
         };
       } else {
         prev[idx] = {
           name: line[2].replace('&amp;', '&'),
-          tags: []
+          tags: [],
+          url: 'https://www.amazon.com/gp/product/' + line[1]
         };
       }
 
-      prev[idx].id = line[1];
       return prev;
     }, []);
 

@@ -27,7 +27,7 @@ class ItemList extends Component {
             <List.Item>
               <List.Item.Meta
                 title={
-                  <a href={`https://www.amazon.com/gp/product/${item.id}`} target="_blank" rel="noopener noreferrer">
+                  <a href={item.url} target="_blank" rel="noopener noreferrer">
                     {item.name}
                   </a>
                 }
