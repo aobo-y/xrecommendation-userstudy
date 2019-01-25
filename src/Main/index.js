@@ -25,7 +25,6 @@ import { getSurvey } from '../lib/surveys';
 import styles from './index.module.css';
 
 const ITEM_NUM = 5;
-const END_STEP = 2;
 
 class Main extends PureComponent {
   state = {
@@ -34,7 +33,7 @@ class Main extends PureComponent {
     context: null,
     survey: null,
     expExpanded: false,
-    step: 0,
+    step: -1,
     stepEnd: false
   }
 
@@ -60,7 +59,7 @@ class Main extends PureComponent {
 
   verifyContext = (dataset, scenario) => {
     if (!['amazon', 'yelp'].includes(dataset)) return false;
-    if (!['0', '1', '2', '3', '4', '5'].includes(scenario)) return false;
+    if (!scenario || !scenarios[Number(scenario)]) return false;
     return true;
   }
 
@@ -112,22 +111,29 @@ class Main extends PureComponent {
     this.setState({ expExpanded: true });
   }
 
+  getSteps = () => {
+    const { context } = this.state;
+    const { scenario } = context || {};
+    return scenarios[scenario] || [];
+  }
+
   onFinishStep = () => {
     const { context, expExpanded, step } = this.state;
+    const steps = this.getSteps();
 
-    if (step !== END_STEP - 1) {
+    if (step !== steps.length - 1) {
       // clear question's inner state
       this.setState({
         userNodes: [],
       }, () => {
-        this.resetStepContext(this.state.step + 1);
+        this.resetStepContext(step + 1);
       });
       return;
     }
 
     const { dataset, scenario } = context;
 
-    const lastEnough = ((new Date()) - this.startTime) > 40000;
+    const lastEnough = ((new Date()) - this.startTime) > 20000;
     const expChecked = expExpanded;
 
     let survey = null;
@@ -136,7 +142,7 @@ class Main extends PureComponent {
     }
 
     this.setState({
-      step: END_STEP,
+      step: step + 1,
       survey
     });
   }
@@ -161,14 +167,22 @@ class Main extends PureComponent {
 
   render() {
     const { userNodes, itemNodes, context, survey, step, stepEnd } = this.state;
+    const steps = this.getSteps();
 
     return (
       <>
-        <Steps current={step} style={{marginBottom: 24}}>
-          <Steps.Step title="System A" />
-          <Steps.Step title="System B" />
-          <Steps.Step title="End" />
-        </Steps>
+        {
+          Boolean(steps.length) && (
+            <Steps current={step} style={{marginBottom: 24}}>
+              {
+                steps.map((_, idx) =>
+                  <Steps.Step key={idx} title={'System ' + String.fromCharCode(65 + idx)} />
+                )
+              }
+              <Steps.Step title="End" />
+            </Steps>
+          )
+        }
 
         {
           stepEnd &&
@@ -200,7 +214,7 @@ class Main extends PureComponent {
         </Row>
 
         <ContextModal visible={!Boolean(context)} onSubmit={this.onContextSubmit} />
-        <SurveyModal visible={step === END_STEP} survey={survey} />
+        <SurveyModal visible={step === steps.length} survey={survey} />
       </>
     );
   }

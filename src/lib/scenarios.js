@@ -33,6 +33,16 @@ const scenarios = [
   [
     {model: 'MFCT', random: true},
     {model: 'MFCT', random: false}
+  ],
+
+  // case 6
+  [
+    {model: 'MFCT', random: false}
+  ],
+
+  // case 7
+  [
+    {model: 'MFCT', random: true}
   ]
 ];
 

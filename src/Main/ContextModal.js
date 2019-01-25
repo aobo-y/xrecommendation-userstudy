@@ -66,7 +66,7 @@ class ContextModal extends PureComponent {
             >
               {
                 scenarios.map((s, idx) => (
-                  <Select.Option value={idx}>{idx}. {this.mapScenarioToStr(s)}</Select.Option>
+                  <Select.Option key={idx} value={idx}>{idx}. {this.mapScenarioToStr(s)}</Select.Option>
                 ))
               }
             </Select>
