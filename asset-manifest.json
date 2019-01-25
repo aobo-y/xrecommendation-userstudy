@@ -1,7 +1,7 @@
 {
   "main.css": "/explanation-recommendation/static/css/main.dbde2a45.chunk.css",
-  "main.js": "/explanation-recommendation/static/js/main.a0ec7a19.chunk.js",
-  "main.js.map": "/explanation-recommendation/static/js/main.a0ec7a19.chunk.js.map",
+  "main.js": "/explanation-recommendation/static/js/main.cfaa141a.chunk.js",
+  "main.js.map": "/explanation-recommendation/static/js/main.cfaa141a.chunk.js.map",
   "static/css/1.6dcf8d10.chunk.css": "/explanation-recommendation/static/css/1.6dcf8d10.chunk.css",
   "static/js/1.b17bd964.chunk.js": "/explanation-recommendation/static/js/1.b17bd964.chunk.js",
   "static/js/1.b17bd964.chunk.js.map": "/explanation-recommendation/static/js/1.b17bd964.chunk.js.map",
@@ -10,6 +10,6 @@
   "static/css/1.6dcf8d10.chunk.css.map": "/explanation-recommendation/static/css/1.6dcf8d10.chunk.css.map",
   "static/css/main.dbde2a45.chunk.css.map": "/explanation-recommendation/static/css/main.dbde2a45.chunk.css.map",
   "index.html": "/explanation-recommendation/index.html",
-  "precache-manifest.0f50f8c7c42c9cf797ab46de056dccf8.js": "/explanation-recommendation/precache-manifest.0f50f8c7c42c9cf797ab46de056dccf8.js",
+  "precache-manifest.30a0bd8b41e90730ae344a4c20ff8b44.js": "/explanation-recommendation/precache-manifest.30a0bd8b41e90730ae344a4c20ff8b44.js",
   "service-worker.js": "/explanation-recommendation/service-worker.js"
 }
