@@ -62,7 +62,7 @@ class ContextModal extends PureComponent {
             <Select
               value={scenario}
               onChange={this.onScenarioChange}
-              style={{width: 200}}
+              style={{width: 280}}
             >
               {
                 scenarios.map((s, idx) => (
