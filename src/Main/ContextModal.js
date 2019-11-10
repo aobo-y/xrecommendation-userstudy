@@ -31,7 +31,7 @@ class ContextModal extends PureComponent {
 
   mapScenarioToStr = (scenario) => {
     return scenario.map(step =>  {
-      return step.model + (step.random ? ' random' : '');
+      return step.model + (step.random ? ' (random explanation)' : '');
     }).join(' vs ');
   }
 

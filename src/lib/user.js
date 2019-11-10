@@ -5,13 +5,13 @@ import yelpMfctNodes from '../data/yelp/MFCT/user_nodes.json';
 
 const allNodes = {
   amazon: {
-    fMf: amazonFmfNodes,
-    MFCT: amazonMfctNodes
+    FMF: amazonFmfNodes,
+    FacT: amazonMfctNodes
   },
 
   yelp: {
-    fMf: yelpFmfNodes,
-    MFCT: yelpMfctNodes
+    FMF: yelpFmfNodes,
+    FacT: yelpMfctNodes
   }
 };
 

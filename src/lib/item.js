@@ -13,8 +13,8 @@ import yelpMFCTNodes from '../data/yelp/MFCT/item_nodes';
 
 const allData = {
   amazon: {
-    fMf: {vectors: amazonFmfVectorsData},
-    MFCT: {
+    FMF: {vectors: amazonFmfVectorsData},
+    FacT: {
       nodes: amazonMFCTNodes,
       vectors: amazonMFCTVectorsData
     },
@@ -22,8 +22,8 @@ const allData = {
     list: amazonList
   },
   yelp: {
-    fMf: {vectors: yelpFmfVectorsData},
-    MFCT: {
+    FMF: {vectors: yelpFmfVectorsData},
+    FacT: {
       nodes: yelpMFCTNodes,
       vectors: yelpMFCTVectorsData
     },

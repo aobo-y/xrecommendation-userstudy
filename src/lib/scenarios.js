@@ -1,53 +1,53 @@
 const scenarios = [
   // case 0
   [
-    {model: 'fMf'},
-    {model: 'MFCT', random: false}
+    {model: 'FMF'},
+    {model: 'FacT', random: false}
   ],
 
   // case 1
   [
-    {model: 'MFCT', random: false},
-    {model: 'fMf'}
+    {model: 'FacT', random: false},
+    {model: 'FMF'}
   ],
 
   // case 2
   [
-    {model: 'fMf'},
-    {model: 'MFCT', random: true}
+    {model: 'FMF'},
+    {model: 'FacT', random: true}
   ],
 
   // case 3
   [
-    {model: 'MFCT', random: true},
-    {model: 'fMf'}
+    {model: 'FacT', random: true},
+    {model: 'FMF'}
   ],
 
   // case 4
   [
-    {model: 'MFCT', random: false},
-    {model: 'MFCT', random: true}
+    {model: 'FacT', random: false},
+    {model: 'FacT', random: true}
   ],
 
   // case 5
   [
-    {model: 'MFCT', random: true},
-    {model: 'MFCT', random: false}
+    {model: 'FacT', random: true},
+    {model: 'FacT', random: false}
   ],
 
   // case 6
   [
-    {model: 'MFCT', random: false}
+    {model: 'FacT', random: false}
   ],
 
   // case 7
   [
-    {model: 'MFCT', random: true}
+    {model: 'FacT', random: true}
   ],
 
   // case 8
   [
-    {model: 'fMf'}
+    {model: 'FMF'}
   ]
 ];
 
