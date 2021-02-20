@@ -1,15 +1,15 @@
 {
-  "main.css": "/explanation-recommendation/static/css/main.13cd163f.chunk.css",
-  "main.js": "/explanation-recommendation/static/js/main.4406609b.chunk.js",
-  "main.js.map": "/explanation-recommendation/static/js/main.4406609b.chunk.js.map",
-  "static/css/1.0bfcced9.chunk.css": "/explanation-recommendation/static/css/1.0bfcced9.chunk.css",
-  "static/js/1.a577124f.chunk.js": "/explanation-recommendation/static/js/1.a577124f.chunk.js",
-  "static/js/1.a577124f.chunk.js.map": "/explanation-recommendation/static/js/1.a577124f.chunk.js.map",
-  "runtime~main.js": "/explanation-recommendation/static/js/runtime~main.9567f3f5.js",
-  "runtime~main.js.map": "/explanation-recommendation/static/js/runtime~main.9567f3f5.js.map",
-  "static/css/main.13cd163f.chunk.css.map": "/explanation-recommendation/static/css/main.13cd163f.chunk.css.map",
-  "static/css/1.0bfcced9.chunk.css.map": "/explanation-recommendation/static/css/1.0bfcced9.chunk.css.map",
-  "index.html": "/explanation-recommendation/index.html",
-  "precache-manifest.5eafc5ef60655c0ef86859870b3c1d36.js": "/explanation-recommendation/precache-manifest.5eafc5ef60655c0ef86859870b3c1d36.js",
-  "service-worker.js": "/explanation-recommendation/service-worker.js"
+  "main.css": "/xrecommendation-userstudy/static/css/main.13cd163f.chunk.css",
+  "main.js": "/xrecommendation-userstudy/static/js/main.a9c39858.chunk.js",
+  "main.js.map": "/xrecommendation-userstudy/static/js/main.a9c39858.chunk.js.map",
+  "static/css/1.0bfcced9.chunk.css": "/xrecommendation-userstudy/static/css/1.0bfcced9.chunk.css",
+  "static/js/1.02b90b91.chunk.js": "/xrecommendation-userstudy/static/js/1.02b90b91.chunk.js",
+  "static/js/1.02b90b91.chunk.js.map": "/xrecommendation-userstudy/static/js/1.02b90b91.chunk.js.map",
+  "runtime~main.js": "/xrecommendation-userstudy/static/js/runtime~main.f888f9ac.js",
+  "runtime~main.js.map": "/xrecommendation-userstudy/static/js/runtime~main.f888f9ac.js.map",
+  "static/css/1.0bfcced9.chunk.css.map": "/xrecommendation-userstudy/static/css/1.0bfcced9.chunk.css.map",
+  "static/css/main.13cd163f.chunk.css.map": "/xrecommendation-userstudy/static/css/main.13cd163f.chunk.css.map",
+  "index.html": "/xrecommendation-userstudy/index.html",
+  "precache-manifest.9c4febd56af09febcd5141d8c438dde7.js": "/xrecommendation-userstudy/precache-manifest.9c4febd56af09febcd5141d8c438dde7.js",
+  "service-worker.js": "/xrecommendation-userstudy/service-worker.js"
 }
